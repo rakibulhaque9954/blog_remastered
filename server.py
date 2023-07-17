@@ -14,13 +14,14 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_ckeditor import CKEditor
 from flask_gravatar import Gravatar
 import smtplib
+import os
 
 email = "hackingandt@gmail.com"
 app_password = "hrqwmhceefjqgzws"
 
 app = Flask(__name__)
 csrf = CSRFProtect(app)
-app.config['SECRET_KEY'] = 'hasdasdasdasdsasd'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 ckeditor = CKEditor(app)
 Bootstrap(app)
 
@@ -33,7 +34,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 
 """Connect to db"""
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 

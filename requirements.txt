@@ -1,6 +1,7 @@
 anyio==3.7.1
 async-generator==1.10
 attrs==23.1.0
+psycopg2-binary==2.9.6
 beautifulsoup4==4.12.2
 blinker==1.6.2
 Bootstrap-Flask==2.2.0
