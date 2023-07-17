@@ -1,0 +1,83 @@
+{% extends 'header.html' %}
+{% block title %}My Blog{% endblock %}
+<!-- Page Header-->
+{% block content %}
+{% if logged_in and not current_user.is_admin %}
+<header class="masthead" style="background-image: url({{ wallpaper }})">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Welcome to my Blog, {{ current_user.name.title().split()[0] }}</h1>
+                    <span class="subheading">" what do you want to explore? "</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% elif logged_in and current_user.is_admin %}
+<header class="masthead" style="background-image: url('https://images.unsplash.com/photo-1600562718259-5cae2c9d2235?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Welcome back Boss</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% else %}
+<header class="masthead" style="background-image: url('../static/assets/img/coffee-2242213.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Welcome to my Blog</h1>
+                    <span class="subheading">" only for knowledge seekers "</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endif %}
+<!-- Main Content-->
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            {% for post in posts %}
+
+            <hr class="my-4"/>
+            <!-- Post preview-->
+            <div class="post-preview">
+                <a href="{{ url_for('post', index=post['id']) }}"><h2 class="post-title">{{ post['title'] }}</h2>
+                    <h3 class="post-subtitle">{{ post['subtitle'] }}</h3>
+                </a>
+                <p class="post-meta">
+                    Posted by
+                    {% if post.author.name == 'rahul haque' %}
+                    <a href="{{ url_for('about') }}">{{ post.author.name }}</a>
+                    {% else %}
+                    <a href="#">{{ post.author.name }}</a>
+                    {% endif %}
+
+                    {{ post['date'] }}{% if current_user.is_admin %}<a href="{{ url_for('delete_post', post_id=post.id) }}"> 🗑️</a>
+                    {% endif %}
+                </p>
+            </div>
+            {% endfor %}
+
+            <!-- Divider-->
+            <hr class="my-4"/>
+            <!-- Pager-->
+            {% if current_user.is_admin %}
+            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase"
+                                                            href="{{ url_for('new_post') }}">CREATE NEW POST →</a></div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+{% include 'footer.html' %}
+{% endblock %}

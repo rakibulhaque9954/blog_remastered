@@ -1,0 +1,89 @@
+{% extends 'header.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}Login-page{% endblock %}
+{% block content %}
+{% include "header.html" %}
+
+<!-- Page Header -->
+<header class="masthead"
+        style="background-image: url('https://images.unsplash.com/photo-1672980818038-8636473c61eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Login</h1>
+                    <span class="subheading">" Welcome Back "</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+
+            <form method="post">
+                {{ form.hidden_tag() }}
+
+                <div class="form-group">
+                    {{ form.email.label }}
+                    {{ form.email(class="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ form.password.label }}
+                    <input type="password" name="password" id="password" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    {{ form.show_password.label(class="form-check-label") }}
+                    {{ form.show_password(class="form-check-input", id="show_password") }}
+                </div>
+                <br>
+
+
+                <div class="form-group text-center"> <!-- Center the Register button -->
+                    {{ form.submit(class="btn btn-primary") }}
+
+                </div>
+
+            </form>
+            <br>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <ul class="flashes">
+                {% for category, message in messages %}
+                {% if category == 'success' %}
+                <li class="alert alert-success">{{ message }}</li>
+                {% elif category == 'error' %}
+                <li class="alert alert-danger">{{ message }}</li>
+                {% elif category == 'warning' %}
+                <li class="alert alert-warning">{{ message }}</li>
+                {% else %}
+                <li class="alert alert-info">{{ message }}</li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+
+
+        </div>
+    </div>
+</div>
+<script>
+    const passwordInput = document.getElementById('password');
+    const showPasswordCheckbox = document.getElementById('show_password');
+
+    showPasswordCheckbox.addEventListener('change', function () {
+        if (this.checked) {
+            passwordInput.type = 'text'; // Show password
+        } else {
+            passwordInput.type = 'password'; // Hide password
+        }
+    });
+
+</script>
+
+{% include "footer.html" %}
+{% endblock %}
