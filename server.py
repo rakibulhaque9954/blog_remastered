@@ -16,8 +16,8 @@ from flask_gravatar import Gravatar
 import smtplib
 import os
 
-email = "hackingandt@gmail.com"
-app_password = "hrqwmhceefjqgzws"
+email = os.environ.get('MY_EMAIL')
+app_password = os.environ.get('APP_PASSWORD')
 
 app = Flask(__name__)
 csrf = CSRFProtect(app)
@@ -297,10 +297,11 @@ def sent():
     email_address = request.form['email']
     phone_number = request.form['phone_number']
     message = request.form['message']
+    sender_email = os.environ.get('sender_email')
     with smtplib.SMTP("smtp.gmail.com", port=587) as connection:
         connection.starttls()
         connection.login(user=email, password=app_password)
-        connection.sendmail(from_addr=email, to_addrs="hackingandtesting2@gmail.com",
+        connection.sendmail(from_addr=email, to_addrs=sender_email,
                             msg=f'Subject: Message from Blog\n\nName: {name}\nEmail: {email_address}\n'
                                 f'Phone Number: {phone_number}\nMessage: {message}')
     return render_template('sent_success.html')
