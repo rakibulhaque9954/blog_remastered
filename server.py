@@ -297,7 +297,7 @@ def sent():
     email_address = request.form['email']
     phone_number = request.form['phone_number']
     message = request.form['message']
-    sender_email = os.environ.get('sender_email')
+    sender_email = os.environ.get('SENDER_EMAIL')
     with smtplib.SMTP("smtp.gmail.com", port=587) as connection:
         connection.starttls()
         connection.login(user=email, password=app_password)
