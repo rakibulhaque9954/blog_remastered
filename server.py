@@ -25,7 +25,7 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 ckeditor = CKEditor(app)
 Bootstrap(app)
 
-"""Gravatar initialisation(basically avatars made by creating hash from associated emails"""
+"""Gravatar initialisation(basically avatars made by creating hash from associated emails)"""
 gravatar = Gravatar(app, size=20, rating='g', default='retro', force_default=False, force_lower=False, use_ssl=False,
                     base_url=None)
 
