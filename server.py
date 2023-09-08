@@ -39,8 +39,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 """Configure table"""
-
-
 class BlogPost(db.Model):
     """blog_post db Schema"""
     id = db.Column(db.Integer, primary_key=True)
@@ -122,8 +120,6 @@ with app.app_context():
     db.create_all()
 
 """decorator for admin only"""
-
-
 def admin_only(view_func):
     @wraps(view_func)
     def decorated_view(*args, **kwargs):
@@ -242,16 +238,19 @@ def edit_post():
         author=post.author,
         body=post.body
     )
-    if request.method == 'POST' and edit_form.validate_on_submit():
-        """Be Careful in adding commas as it can lead to tuples being created unnecessarily and debugging for hours"""
-        post.title = edit_form.title.data
-        post.subtitle = edit_form.subtitle.data
-        post.date = post.date
-        post.body = edit_form.body.data
-        post.img_url = f"{edit_form.img_url.data}"
-        post.author = edit_form.author.data
-        db.session.commit()
-        return redirect(url_for('post', index=post_id))
+    try:
+      if request.method == 'POST' and edit_form.validate_on_submit():
+          """Be Careful in adding commas as it can lead to tuples being created unnecessarily and debugging for hours"""
+          post.title = edit_form.title.data
+          post.subtitle = edit_form.subtitle.data
+          post.date = post.date
+          post.body = edit_form.body.data
+          post.img_url = f"{edit_form.img_url.data}"
+          post.author = edit_form.author.data
+          db.session.commit()
+          return redirect(url_for('post', index=post_id))
+    except Exception as e:
+      return abort(404, e)
 
     return render_template('edit_post.html', form=edit_form, logged_in=current_user.is_authenticated)
 
