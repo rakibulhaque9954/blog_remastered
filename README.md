@@ -1,5 +1,6 @@
-# blog_remastered coming soon
+# Blogzart!(version 2.0) coming soon
 TODO: 
-- need to fix the edit and submit section for the change to take place,
 - need to update postgres and buy credits
-- add few more functionalities
+- users will be able to create, post and delete content
+- AI flagging and harmful content scanning using Neural Networks
+- Users follow and messaging
