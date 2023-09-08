@@ -250,7 +250,7 @@ def edit_post():
           db.session.commit()
           return redirect(url_for('post', index=post_id))
     except Exception as e:
-      return abort(404, e)
+      return abort(404, e) # great for debugging
 
     return render_template('edit_post.html', form=edit_form, logged_in=current_user.is_authenticated)
 
