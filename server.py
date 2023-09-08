@@ -246,7 +246,7 @@ def edit_post():
           post.date = post.date
           post.body = edit_form.body.data
           post.img_url = f"{edit_form.img_url.data}"
-          post.author = post.author.data
+          post.author = post.author
           db.session.commit()
           return redirect(url_for('post', index=post_id))
     except Exception as e:
