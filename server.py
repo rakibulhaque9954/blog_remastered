@@ -34,7 +34,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 
 """Connect to db"""
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_RL')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
