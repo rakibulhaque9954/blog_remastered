@@ -6,3 +6,5 @@ TODO:
 - Users follow and messaging
 - Post with better UI
 - Transfer to GCP
+- Use api from gcp where comment flagger will be hosted.
+- still use render
