@@ -61,7 +61,7 @@ Acts as the main landing page template, incorporating logic for displaying diffe
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [License](https://github.com/rakibulhaque9954/blog_remastered/blob/2067516a1ceb3aff915fc2cd47be07df46cf7bb6/MIT_LICENSE_Rakibul_Haque.txt) file for details.
 
 ## Contact
 
