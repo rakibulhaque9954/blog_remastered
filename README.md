@@ -1,4 +1,5 @@
 # Blogzart!
+[日本語](https://github.com/rakibulhaque9954/blog_remastered/blob/74bf117f4576450b8eae2b658ca1273c2e529dc4/%E6%97%A5%E6%9C%AC%E8%AA%9EREADME.md)
 
 ## Description
 
