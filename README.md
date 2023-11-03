@@ -48,8 +48,9 @@ flask db upgrade
 
 # Launch the server
 flask run
-Visit http://localhost:5000 in your browser to start using Blogzart!
 ```
+Visit http://localhost:5000 in your browser to start using Blogzart!
+
 
 ## Codebase Overview
 
