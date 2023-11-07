@@ -184,7 +184,7 @@ def post(index):
         response = comment_flag(comment)
         flag_classes = ''
         for cls in response['classes']:
-            flag_classes += cls + ', '
+            flag_classes += f'"{cls}" '
           
         if response:
             if response['flag'] == 'true':
