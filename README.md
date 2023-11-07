@@ -1,4 +1,4 @@
-# Blogzart!
+# Blogzart 2.0!
 [日本語](https://github.com/rakibulhaque9954/blog_remastered/blob/74bf117f4576450b8eae2b658ca1273c2e529dc4/%E6%97%A5%E6%9C%AC%E8%AA%9EREADME.md)
 
 ## Description
@@ -18,7 +18,27 @@
 - **Admin Dashboard**: Equipped for site administrators to manage posts and users effectively.
 
 ### Future Enhancements
-- **AI-Based Comment Moderation**: We are excited to be working on an LSTM RNN model to intelligently moderate comments, ensuring conversations remain respectful and relevant.
+
+- **AI-Based Comment Moderation**: The LSTM RNN model, hosted on GCP, moderates comments in real-time through RESTful API calls from the main blog platform hosted on Render. This integration ensures efficient and scalable comment moderation with a 99% accuracy rate.
+- **Here is the Repository**: [Click here](https://github.com/rakibulhaque9954/Comment_Flag_LSTM_Model.git)
+
+## What's New in Blogzart 2.0
+
+- **Cloud-Powered AI Moderation**: Blogzart now harnesses the power of cloud computing with the LSTM-based flagger deployed on GCP. This allows for high-availability and low-latency responses to comment submissions.
+- **RESTful API Integration**: The platform uses RESTful API requests from the main blog hosted on Render to perform comment analysis, providing a seamless experience for users and maintaining the integrity of discussions.
+- **Scalable Architecture**: The use of GCP for hosting our AI model ensures that Blogzart can handle increased traffic and comment volume without compromising performance.
+
+## Deployed on GCP
+
+Blogzart’s AI moderation system is built with Flask and hosted on Google Cloud Platform, leveraging its managed services to ensure high performance and availability. The RESTful API allows the main blog, hosted on Render, to communicate with the AI model seamlessly, offloading the heavy lifting of comment analysis to the cloud. This approach ensures that the user experience remains fast and responsive, even as the platform grows.
+
+![toxic comment](https://github.com/rakibulhaque9954/blog_remastered/blob/adc3cb260e2fc032a888f194fe0fc02e048dda5e/comment.png)
+*Toxic Comment*
+
+![flagged messages](https://github.com/rakibulhaque9954/blog_remastered/blob/adc3cb260e2fc032a888f194fe0fc02e048dda5e/flagged%20message.png)
+*Flagged Messages*
+
+Stay tuned for further updates as we continue to enhance the Blogzart experience!
 
 ## Getting Started
 
