@@ -18,3 +18,4 @@ Werkzeug==2.2.3
 wheel==0.38.4
 wsproto==1.2.0
 WTForms==2.3.3
+requests
