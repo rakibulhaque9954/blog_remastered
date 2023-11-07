@@ -15,6 +15,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_ckeditor import CKEditor
 from flask_gravatar import Gravatar
 import smtplib
+import requests
 import os
 
 email = os.environ.get('MY_EMAIL')
