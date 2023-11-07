@@ -1,6 +1,7 @@
 import datetime
 import random
 import time
+import json
 from functools import wraps
 import werkzeug.security
 from sqlalchemy.orm import relationship
@@ -152,6 +153,18 @@ def home_page():
                            wallpaper=wallpaper)
 
 
+# GCP LSTM Comment Flagger
+def comment_flag(comment):
+    # sending comment as params for my get request from my gcp model for inference on comments
+    response = requests.get('https://lstm-flagger-ver-1-znzp2767aq-an.a.run.app', params={'text': comment})
+
+    try:
+        return response.json()
+    except json.JSONDecodeError as e:
+        print("Decoding JSON has failed:", e)
+        return None
+
+
 @app.route('/blog/<index>', methods=['GET', 'POST'])
 def post(index):
     """Post page of the blog"""
@@ -164,15 +177,32 @@ def post(index):
         flash('Please Login or register to comment', 'error')
         return redirect(url_for('login'))
     elif request.method == 'POST' and form.validate_on_submit():
-        new_comment = Comment(
-            comments=form.body.data,
-            comment_user=current_user,
-            post=result
+        # get comment data
+        comment = form.body.data
+        # passing to request function
+        response = comment_flag(comment)
+        flag_classes = ''
+        for cls in response['classes']:
+            flag_classes += cls + ', '
+          
+        if response:
+            if response['flag'] == 'true':
+                # error messages for the comment
+                session.pop('_flashes', [])
+                flash(f'Your Comments dont follow the guidelines', 'error')
+                flash(f'They fall under {flag_classes} categories', 'error')
+                flash('Please comment within the guidelines', 'error')
+                return redirect(url_for('post', index=result.id))
+            else:
+                new_comment = Comment(
+                    comments=form.body.data,
+                    comment_user=current_user,
+                    post=result
 
-        )
-        db.session.add(new_comment)
-        db.session.commit()
-        return redirect(url_for('post', index=result.id))
+                )
+                db.session.add(new_comment)
+                db.session.commit()
+                return redirect(url_for('post', index=result.id))
 
     return render_template('post.html', post_s=result, logged_in=current_user.is_authenticated, form=form)
 
