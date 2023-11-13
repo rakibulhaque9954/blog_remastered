@@ -1,4 +1,4 @@
-# Blogzart!
+# Blogzart! 2.0
 
 ## 説明
 
